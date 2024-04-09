@@ -32,6 +32,7 @@ function Home() {
       fullfilled: false,
     };
     setTask("");
+    setTasks([...tasks, taskInfo]);
     await createNotes(taskInfo);
     allnotes();
   };
@@ -39,12 +40,21 @@ function Home() {
   // delete note
 
   const deleteHandler = async (id: string) => {
+    setTasks(tasks.filter((info) => info._id !== id));
     await deleteNotes(id);
     allnotes();
   };
 
   // update note
   const update = async (id: string) => {
+    let info: NoteType[] = [];
+    tasks.forEach((ele) => {
+      if (ele._id === id) {
+        ele.fullfilled = ele.fullfilled ? false : true;
+      }
+      info.push(ele);
+    });
+    setTasks(info);
     await updateNotes(id);
     allnotes();
   };
