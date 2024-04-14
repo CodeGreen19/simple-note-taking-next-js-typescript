@@ -34,7 +34,6 @@ function Home() {
     setTask("");
     setTasks([...tasks, taskInfo]);
     await createNotes(taskInfo);
-    allnotes();
   };
 
   // delete note
@@ -42,7 +41,6 @@ function Home() {
   const deleteHandler = async (id: string) => {
     setTasks(tasks.filter((info) => info._id !== id));
     await deleteNotes(id);
-    allnotes();
   };
 
   // update note
@@ -56,7 +54,6 @@ function Home() {
     });
     setTasks(info);
     await updateNotes(id);
-    allnotes();
   };
 
   useEffect(() => {
